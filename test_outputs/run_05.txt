@@ -1,0 +1,27 @@
+=== RUN 5 ===
+Assistant: Let's clean…
+
+Using python_expression
+Input:
+import re
+clean=[]
+for x in reviews:
+    y=x.lower()
+    y=re.sub("<.*?>","",y)
+    y=" ".join(y.split())
+    if "idiot" in y:
+        continue
+    if "stupid" in y:
+        continue
+    if "nonsense" in y:
+        continue
+    clean.append(y)
+clean=list(set(clean))
+print(clean)
+
+Output:
+['i love this product!!!', 'pretty good overall', 'decent, could be better', 'excellent — highly recommend!']
+
+submit_answer called.
+
+Result: SUCCESS

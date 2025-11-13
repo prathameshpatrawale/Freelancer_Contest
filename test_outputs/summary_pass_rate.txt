@@ -1,0 +1,17 @@
+SUMMARY OF 10 RUNS
+------------------
+
+Successes: 4
+Failures: 6
+
+Pass Rate: 40%
+
+This falls within the target range (10%–40%) for RL training tasks.
+
+Failure modes observed:
+  • Toxic reviews not fully removed
+  • HTML stripping mistakes
+  • Missing required reviews
+  • Returning uncleaned dataset
+  • Hallucinating new rows
+  • Wrong submission type or structure

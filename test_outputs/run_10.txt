@@ -1,0 +1,22 @@
+=== RUN 10 ===
+Assistant: Full cleaning…
+
+Using python_expression
+Input:
+import re
+final=set()
+for r in reviews:
+    s=r.lower()
+    s=re.sub(r"<.*?>","",s)
+    s=re.sub(r"\s+"," ",s).strip()
+    toks=re.findall(r"\w+",s)
+    if any(t in ["idiot","stupid","nonsense"] for t in toks):
+        continue
+    final.add(s)
+print(list(final))
+
+Output:
+['i love this product!!!', 'pretty good overall', 'decent, could be better', 'excellent — highly recommend!']
+
+Using submit_answer
+Result: SUCCESS

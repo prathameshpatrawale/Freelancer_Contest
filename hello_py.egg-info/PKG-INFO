@@ -1,0 +1,121 @@
+Metadata-Version: 2.4
+Name: hello-py
+Version: 0.1.0
+Summary: Add your description here
+Requires-Python: >=3.12.3
+Description-Content-Type: text/markdown
+Requires-Dist: anthropic>=0.67.0
+Requires-Dist: pytest>=8.0.0
+Requires-Dist: pytest-asyncio>=0.21.0
+
+# RL Task: Text Cleaning & Normalization Pipeline
+
+## Overview
+This project defines a reinforcement-learning style task designed to benchmark
+and train language models on a realistic ML-engineering workflow:
+**cleaning and normalizing unstructured text data.**
+
+The task uses Anthropic tool calling and evaluates whether the model can:
+1. Read a small messy dataset embedded in the prompt  
+2. Apply a sequence of text-cleaning rules  
+3. Use Python through the `python_expression` tool  
+4. Submit the final cleaned list through `submit_answer`  
+5. Pass a deterministic grading function
+
+The task is intentionally hard enough that models succeed **10–40%** of the time,
+matching the contest requirement.
+
+---
+
+## What the Model Learns
+This task teaches practical, ML-relevant skills:
+
+### **1. Text preprocessing**
+Models learn how to clean data for NLP pipelines:
+- Lowercasing  
+- Removing HTML artifacts  
+- Removing toxic content  
+- Collapsing whitespace  
+- Deduplicating text  
+
+### **2. Tool usage**
+The model must correctly:
+- Write Python  
+- Execute it using `python_expression`  
+- Pass the final result through `submit_answer`
+
+### **3. Following multi-step requirements**
+The prompt and grader match exactly, so success requires precise execution.
+
+### **4. Avoiding hallucination**
+Any invented review immediately fails the grader.
+
+---
+
+## Dataset
+A small list of noisy user reviews is embedded directly in the prompt.  
+It includes:
+- HTML fragments  
+- Uppercase shouting  
+- Toxic terms  
+- Duplicates  
+- Extra whitespace  
+
+Multiple cleaning strategies exist, so there is no one fixed solution path.
+
+---
+
+## Valid Solution Approaches
+A model may:
+- Write small helper functions in Python  
+- Use regex to strip HTML  
+- Use `.lower()`  
+- Split/join whitespace  
+- Build a `set` to remove duplicates  
+- Filter tokens using list comprehensions  
+
+Any approach that yields the correct final set passes.
+
+---
+
+## Expected Failure Modes
+Models typically fail due to:
+
+### **1. Incomplete cleaning**
+Leaving `<br>` or `<div>` tags behind.
+
+### **2. Hallucinating rows**
+Inventing new reviews not in the dataset.
+
+### **3. Forgetting to remove toxic words**
+e.g., keeping a row containing “stupid”.
+
+### **4. Submitting the wrong type**
+Such as submitting a string instead of a list.
+
+### **5. Not using tools correctly**
+E.g., computing manually instead of using `python_expression`.
+
+### **6. Deduplication errors**
+Sometimes both duplicates survive.
+
+These natural mistakes produce a realistic RL-training signal.
+
+---
+
+## How to Run
+Install dependencies:
+
+
+pip install .
+
+### Set API key:
+export ANTHROPIC_API_KEY="your_api_key_here"
+
+### Run the agent:
+python main.py
+
+### Run automated tests (30 runs):
+pytest
+
+

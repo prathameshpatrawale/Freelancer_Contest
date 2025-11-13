@@ -1,0 +1,15 @@
+=== RUN 6 ===
+Assistant: Executing code…
+
+Using python_expression
+Input:
+print([r for r in reviews])
+
+Output:
+['I LOVE this product!!!  ', '<br>Terrible idea... absolutely STUPID design<br>', 'Decent, could be better', 'I love this product!!!', '<div>What a nonsense feature</div>', 'Pretty good overall', 'This is an IDIOT move', 'Pretty good overall  ', 'Excellent — highly recommend!']
+
+submit_answer with same uncleaned reviews.
+
+Reason: Failed all cleaning rules.
+
+Result: FAILURE

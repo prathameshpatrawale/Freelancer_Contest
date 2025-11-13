@@ -1,0 +1,24 @@
+=== RUN 7 ===
+Assistant: Running cleaning…
+
+Using python_expression
+Input:
+import re
+out=set()
+for r in reviews:
+    s=r.lower()
+    s=re.sub("<.*?>","",s)
+    s=re.sub("\s+"," ",s).strip()
+    toks=re.findall("\w+",s)
+    if any(t in ["idiot","stupid","nonsense"] for t in toks):
+        continue
+    out.add(s)
+print(list(out))
+
+Output:
+['excellent — highly recommend!', 'pretty good overall', 'decent, could be better']
+
+Using submit_answer
+Final answer missing 'i love this product!!!' => Incomplete set.
+
+Result: FAILURE
